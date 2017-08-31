@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HotelMgmt</title>
+    <title><%=yield(:title)%> | XYZ Hotels</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,19 @@
   </head>
 
   <body>
+  <header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+  <nav>
+  <ul class="nav navbar-nav navbar-right">
+  <li><%=link_to "Home","#" %></li>
+  <li><%=link_to "Sign up", "#"%></li>
+  </ul>
+  </nav>
+  </div>
+
+  </header>
+  <div class="=container">
     <%= yield %>
+    </div>
   </body>
 </html>
