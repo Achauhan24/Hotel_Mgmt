@@ -13,6 +13,7 @@ class CustomersController < ApplicationController
 
   	@customer=Customer.new(customer_params)
   	if @customer.save
+      log_in @customer
       flash[:success]="Welcome to XYZ Hotels"
       redirect_to @customer
   	else
