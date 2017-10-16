@@ -17,4 +17,9 @@ module SessionsHelper
 		session.delete(:customer_id)
 		@current_customer=nil
 	end
+
+	def current_customer?(customer)
+		customer==current_customer
+
+	end
 end

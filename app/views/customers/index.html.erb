@@ -1,0 +1,10 @@
+<%provide(:title,"All Customers") %>
+<h1>All Our Valued Customers</h1>
+<%= will_paginate %>
+<ul class="users">
+<% @customers.each do |customer| %>
+	<%= render @customers %>
+	<%end%>
+	</ul>
+	<%= will_paginate %>
+
