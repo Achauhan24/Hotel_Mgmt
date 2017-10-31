@@ -5,6 +5,7 @@ class CustomersController < ApplicationController
 
   def show
   	@customer = Customer.find(params[:id])
+    @microposts=@customer.microposts.paginate(page: params[:page])
 
   end
 
@@ -17,9 +18,9 @@ class CustomersController < ApplicationController
 
   	@customer=Customer.new(customer_params)
   	if @customer.save #handle successful save
-      log_in @customer
-      flash[:success]="Welcome to XYZ Hotels"
-      redirect_to @customer
+      CustomerMailer.account_activation(@customer).deliver_now
+      flash[:info]="Please check your inbox to activate the account"
+      redirect_to root_url
   	else
   		render 'new'
   	end

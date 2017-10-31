@@ -1,0 +1,9 @@
+<h1>Hi <%= @customer.name %>,</h1>
+<p>
+Welcome to XYZ Hotels!Click on the the link to activate your account
+</p>
+
+
+
+<%= link_to "Activate" ,edit_account_activation_url(@customer.activation_token,email: @customer.email)%>
+

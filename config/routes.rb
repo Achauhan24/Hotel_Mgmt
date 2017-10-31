@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+ 
+
   get 'sessions/new'
 
 resources :customers
@@ -17,6 +19,8 @@ root 'static_pages#home'
   get '/login' , to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  resources :account_activations, only: [:edit]
+  resources :microposts, only: [:create,:destroy]
   #patch '/customers/:id/edit', to: 'customers#update'
 
   
