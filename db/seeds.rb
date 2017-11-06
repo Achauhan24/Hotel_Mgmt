@@ -25,9 +25,16 @@ Customer.create!(name: "Example User",
 	activated_at:Time.zone.now)
 end
 
-customers=Customer.order(:created_at).take(6)
+customers=Customer.order(:created_at).take(10)
 50.times do
 	content=Faker::Lorem.sentence(5)
 	customers.each{|customer| customer.microposts.create!(content: content)}
 end
-			
+
+#microposts
+customers=Customer.all
+customer=customers.first
+following=customers[2..50]
+followers=customers[3..40]
+following.each{|followed| customer.follow(followed)}
+followers.each{|follower| follower.follow(customer)} 			

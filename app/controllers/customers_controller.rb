@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :logged_in_customer,only: [:edit,:update]
+  before_action :logged_in_customer,only: [:edit,:update,:index,:destroy,:following,:followers]
   before_action :correct_customer,only: [:edit,:update]
   before_action :admin_user,only: [:destroy]
 
@@ -48,12 +48,7 @@ class CustomersController < ApplicationController
     
   end
 
-  def logged_in_customer
-    unless logged_in?
-      flash[:danger]="Please log in"
-      redirect_to login_url
-    end
-  end
+ 
 
   def correct_customer
     @customer=Customer.find(params[:id])
@@ -65,6 +60,21 @@ class CustomersController < ApplicationController
     @customer.destroy
     flash[:success]="Customer deleted"
     redirect_to customers_url
+  end
+
+  def following
+    @title="Following"
+    @customer=Customer.find(params[:id])
+    @customers=@customer.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title="Followers"
+    @customer=Customer.find(params[:id])
+    @customers=@customer.followers.paginate(page: params[:page])
+    render 'show_follow'
+
   end
 
   def admin_user
